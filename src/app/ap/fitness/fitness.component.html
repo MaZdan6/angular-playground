@@ -1,0 +1,41 @@
+<h1>BMI calculator</h1>
+
+
+<form (ngSubmit)="onSubmit()" #bmiForm="ngForm">
+  <div class="form-group">
+    <label for="height">Height:</label>
+    <input type="text"
+           class="form-control"
+           id="height"
+           required
+           name="height"
+           [(ngModel)]="bmi.height"
+    />
+  </div>
+
+  <label for="wieght">Weight:</label>
+  <input type="text"
+         class="form-control"
+         id="wieght"
+         required
+         name="wieght"
+         [(ngModel)]="bmi.weight"
+  />
+
+
+  <label for="sex">sex:</label>
+  <input type="text"
+         class="form-control"
+         id="sex"
+         required
+         name="sex"
+         [(ngModel)]="bmi.sex"
+  />
+  <!--public height: number,
+  public weight: number,
+  public sex: string,
+  public index: number-->
+
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+<pre>{{ bmi | json }}</pre>
