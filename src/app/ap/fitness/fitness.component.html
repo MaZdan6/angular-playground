@@ -10,6 +10,8 @@
            required
            name="height"
            [(ngModel)]="bmi.height"
+           maxlength="3"
+           minlength="2"
     />
   </div>
 
@@ -20,6 +22,8 @@
          required
          name="wieght"
          [(ngModel)]="bmi.weight"
+         maxlength="3"
+         minlength="2"
   />
 
 
@@ -30,12 +34,10 @@
          required
          name="sex"
          [(ngModel)]="bmi.sex"
+
   />
-  <!--public height: number,
-  public weight: number,
-  public sex: string,
-  public index: number-->
 
   <button type="submit" class="btn btn-success">Submit</button>
 </form>
+<h2>Body mass index:{{bmi.index}}</h2>
 <pre>{{ bmi | json }}</pre>

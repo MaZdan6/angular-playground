@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {query} from '@angular/animations';
 import {BMI} from './fitness.model';
-import {NgModel} from '@angular/forms';
 
 export type index = number;
 
@@ -11,7 +9,7 @@ export type index = number;
   styleUrls: ['./fitness.component.scss']
 })
 export class FitnessComponent implements OnInit {
-  bmi = new BMI(1, 1, 'male', 1);
+  bmi = new BMI(184, 96, 'male', 0);
   submitted = false;
 
   constructor() {
@@ -28,6 +26,8 @@ export class FitnessComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log('onSubmit()');
+    //this.bmi.height = ;
+    this.bmi.index = Math.round(this.bmi.weight / (Math.pow(this.bmi.height /100, 2)));
   }
 
   // TODO: Remove this when we're done
