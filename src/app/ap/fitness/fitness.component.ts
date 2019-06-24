@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BMI} from './fitness.model';
+import {BMI, Category} from './fitness.model';
+import {FitnessService} from './FitnessService';
 
 export type index = number;
 
@@ -9,28 +10,23 @@ export type index = number;
   styleUrls: ['./fitness.component.scss']
 })
 export class FitnessComponent implements OnInit {
-  bmi = new BMI(184, 96, 'male', 0);
+  bmi = new BMI(184, 96, Category.overweight, 0);
   submitted = false;
 
-  constructor() {
+  constructor(private fService: FitnessService) {
   }
 
   ngOnInit() {
   }
 
-  calculete(bmi) {
-    console.log(`calculete:${this.bmi}`);
-  }
-
-
   onSubmit() {
     this.submitted = true;
     console.log('onSubmit()');
-    //this.bmi.height = ;
-    this.bmi.index = Math.round(this.bmi.weight / (Math.pow(this.bmi.height /100, 2)));
+    this.bmi.index = this.fService.computeBodyMassIndex(this.bmi.height, this.bmi.weight);
+    this.bmi.category= this.fService.setCategory(this.bmi.index);
   }
 
-  // TODO: Remove this when we're done
+// TODO: Remove this when we're done
   getDiagnostic() {
     return JSON.stringify(this.bmi);
   }
