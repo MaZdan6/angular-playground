@@ -27,7 +27,8 @@ export class BMI {
     public height: number,
     public weight: number,
     public category: string,
-    public index: number
+    public index: number,
+    public fitWeight: number
   ) {
   }
 

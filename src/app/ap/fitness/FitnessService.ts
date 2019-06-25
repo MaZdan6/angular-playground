@@ -14,6 +14,20 @@ export class FitnessService {
     return indexBMI;
   }
 
+  calculateFitWeight(height: number, weight: number, index: number) {
+    let fitWeight;
+    const minNormalIndex = this.minValue.normal;
+    const maxNormalndex = this.minValue.overweight;
+    if (index > maxNormalndex) {
+
+      fitWeight = maxNormalndex * (Math.pow(height / 100, 2));
+    } else if (index < minNormalIndex) {
+      fitWeight = minNormalIndex * (Math.pow(height / 100, 2));
+    }
+    fitWeight = parseFloat(fitWeight.toFixed(2));
+    return fitWeight;
+  }
+
   setCategory(index: number) {
 
     let category: string;
@@ -41,4 +55,6 @@ export class FitnessService {
 
     return category;
   }
+
+
 }

@@ -10,7 +10,7 @@ export type index = number;
   styleUrls: ['./fitness.component.scss']
 })
 export class FitnessComponent implements OnInit {
-  bmi = new BMI(184, 96, Category.overweight, 0);
+  bmi = new BMI(184, 96, Category.overweight, 0, 12);
   submitted = false;
 
   constructor(private fService: FitnessService) {
@@ -23,7 +23,8 @@ export class FitnessComponent implements OnInit {
     this.submitted = true;
     console.log('onSubmit()');
     this.bmi.index = this.fService.computeBodyMassIndex(this.bmi.height, this.bmi.weight);
-    this.bmi.category= this.fService.setCategory(this.bmi.index);
+    this.bmi.category = this.fService.setCategory(this.bmi.index);
+    this.bmi.fitWeight = this.fService.calculateFitWeight(this.bmi.height, this.bmi.weight, this.bmi.index);
   }
 
 // TODO: Remove this when we're done
