@@ -7,9 +7,10 @@ import { FitnessComponent } from './fitness/fitness.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import { FitnessWeightHistoryComponent } from './fitness-weight-history/fitness-weight-history.component';
 
 @NgModule({
-  declarations: [MathComponent, WeatherComponent, FinanceComponent, FitnessComponent],
+  declarations: [MathComponent, WeatherComponent, FinanceComponent, FitnessComponent, FitnessWeightHistoryComponent],
   imports: [
     CommonModule,
     HttpClientModule,
