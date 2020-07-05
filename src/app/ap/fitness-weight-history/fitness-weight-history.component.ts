@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {WeightService} from './WeightService';
+import {Weight} from './Weight';
 
 @Component({
   selector: 'ap-fitness-weight-history',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fitness-weight-history.component.scss']
 })
 export class FitnessWeightHistoryComponent implements OnInit {
+  errorMessage = '';
+  weights: Weight[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private weightService: WeightService) {
   }
 
+  ngOnInit() {
+    this.weightService.getWeights().subscribe({
+      next: weight => {
+        this.weights = weight;
+      },
+      error: err => this.errorMessage = err
+    });
+  }
 }

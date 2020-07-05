@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {BMI, Category} from './fitness.model';
 import {FitnessService} from './FitnessService';
 
-export type index = number;
-
 @Component({
   selector: 'ap-fitness',
   templateUrl: './fitness.component.html',
@@ -32,3 +30,5 @@ export class FitnessComponent implements OnInit {
     return JSON.stringify(this.bmi);
   }
 }
+
+export type index = number;

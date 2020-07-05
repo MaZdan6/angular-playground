@@ -1,5 +1,7 @@
 import {Category, CategoryMinIndexValue} from './fitness.model';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class FitnessService {
 
   minValue = CategoryMinIndexValue;

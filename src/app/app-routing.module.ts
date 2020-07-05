@@ -7,8 +7,6 @@ import {FinanceComponent} from './ap/finance/finance.component';
 import {FitnessComponent} from './ap/fitness/fitness.component';
 
 /*mapowanie ścieżek na komponenty*/
-
-
 const routes: Routes = [
   { path: 'ap', component: HomeComponent},
   { path: 'math', component: MathComponent},
