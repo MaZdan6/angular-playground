@@ -1,1 +1,33 @@
 <p>fitness-weight-history works!</p>
+
+
+<div class='card'>
+  <div class='card-header'>
+    Weight List
+  </div>
+  <div class='card-body'>
+    <div class='table-responsive'>
+      <table class='table'
+             *ngIf='weights && weights.length'>
+        <thead>
+        <tr>
+          <th>id</th>
+          <th>weight</th>
+          <th>date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let weight of weights'>
+          <td>{{ weight.id }}</td>
+          <td>{{ weight.weight }}</td>
+          <td>{{ weight.date }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf='errorMessage'
+     class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>
