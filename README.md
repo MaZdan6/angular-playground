@@ -1,3 +1,8 @@
+## json server
+run server (in mocks directory): json-server --watch db.json
+GET data: http://localhost:3000/weights
+
+
 # AngularPlayground
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
