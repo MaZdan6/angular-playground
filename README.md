@@ -1,5 +1,6 @@
 ## json server
-run server (in mocks directory): json-server --watch db.json
+run server (in mocks directory): 
+```json-server --watch mock/db.json```
 GET data: http://localhost:3000/weights
 
 

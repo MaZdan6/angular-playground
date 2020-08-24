@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap, map} from 'rxjs/operators';
 
@@ -12,7 +12,11 @@ export class WeightService {
   // If using Stackblitz, replace the url with this line
   // because Stackblitz can't find the api folder.
   // private productUrl = 'assets/products/products.json';
-  private productUrl = 'assets/weights/weights.json';
+  // http://localhost:3000/weights
+  // assets/weights/weights.json
+  private productUrl = 'http://localhost:3000/weights';
+  private basicUrl = 'http://localhost:3000/weights';
+
 
   constructor(private http: HttpClient) {
   }
@@ -42,4 +46,12 @@ export class WeightService {
     return throwError(errorMessage);
   }
 
+  addWeight(newWeight: Weight): Observable<Weight> {
+    return this.http.post<Weight>(this.basicUrl, newWeight, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+
+  }
 }
