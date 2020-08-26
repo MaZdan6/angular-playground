@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {WeightService} from './WeightService';
 import {Weight} from './Weight';
 
@@ -7,7 +7,8 @@ import {Weight} from './Weight';
   templateUrl: './fitness-weight-history.component.html',
   styleUrls: ['./fitness-weight-history.component.scss']
 })
-export class FitnessWeightHistoryComponent implements OnInit {
+export class FitnessWeightHistoryComponent implements OnInit, OnChanges {
+
   errorMessage = '';
   weights: Weight[] = [];
 
@@ -22,4 +23,19 @@ export class FitnessWeightHistoryComponent implements OnInit {
       error: err => this.errorMessage = err
     });
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ngOnChanges');
+  }
+
+  deleteWeight(id: number) {
+    this.weightService.deleteWeight(id)
+      .subscribe(
+        (data: any) => console.log(data),
+        (err: any) => console.log(err)
+      );
+    console.warn(`Delete weight ${id}).`);
+  }
+
+
 }

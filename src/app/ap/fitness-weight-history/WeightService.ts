@@ -54,4 +54,19 @@ export class WeightService {
     });
 
   }
+
+
+// UPDATE
+  updateWight(updatedWeight: Weight): Observable<void> {
+    return this.http.put<void>(this.basicUrl.concat('/${updatedWeight.bookID}'), updatedWeight, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+// DELETE
+  deleteWeight(id: number): Observable<void> {
+    return this.http.delete<void>(this.basicUrl.concat(`/${id}`));
+  }
 }

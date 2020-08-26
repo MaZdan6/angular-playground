@@ -21,6 +21,10 @@
           <td>{{ weight.id }}</td>
           <td>{{ weight.weight }}</td>
           <td>{{ weight.date }}</td>
+          <td>
+            <button  type="button" class="btn btn-sm btn-warning">Edit</button>&nbsp;
+            <button (click)="deleteWeight(weight.id)" type="button" class="btn btn-sm btn-danger">Delete</button>
+          </td>
         </tr>
         </tbody>
       </table>
