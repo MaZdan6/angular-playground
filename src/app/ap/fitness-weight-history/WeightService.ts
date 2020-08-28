@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap, map} from 'rxjs/operators';
 
 import {Weight} from './Weight';
@@ -17,6 +17,9 @@ export class WeightService {
   private productUrl = 'http://localhost:3000/weights';
   private basicUrl = 'http://localhost:3000/weights';
 
+  reloadWeightSubject = new Subject<boolean>();
+  reloadWeightObservable = this.reloadWeightSubject.asObservable();
+  private delete$: Observable<void>;
 
   constructor(private http: HttpClient) {
   }

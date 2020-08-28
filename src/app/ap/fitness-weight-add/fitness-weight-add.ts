@@ -22,8 +22,12 @@ export class FitnessWeightAdd implements OnInit {
 
     this.service.addWeight(newWeight)
       .subscribe(
-        (data: Weight) => console.log(data),
-        (err: any) => console.log(err)
+        (data: Weight) => {
+          // alert('Success Adding');
+          console.log(data);
+        },
+        (err: any) => console.log(err),
+        () => this.service.reloadWeightSubject.next(true)
       );
   }
 
