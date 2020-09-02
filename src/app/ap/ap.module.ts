@@ -1,18 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MathComponent } from './math/math.component';
-import { WeatherComponent } from './weather/weather.component';
-import { FinanceComponent } from './finance/finance.component';
-import { FitnessComponent } from './fitness/fitness.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MathComponent} from './math/math.component';
+import {WeatherComponent} from './weather/weather.component';
+import {FinanceComponent} from './finance/finance.component';
+import {FitnessComponent} from './fitness/fitness.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import { FitnessWeightHistoryComponent } from './fitness-weight-history/fitness-weight-history.component';
+import {FitnessWeightHistoryComponent} from './fitness-weight-history/fitness-weight-history.component';
 import {FitnessWeightAdd} from './fitness-weight-add/fitness-weight-add';
-import { FitnessWeightEditComponent } from './fitness-weight-edit/fitness-weight-edit.component';
+import {FitnessWeightEditComponent} from './fitness-weight-edit/fitness-weight-edit.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [MathComponent, WeatherComponent, FinanceComponent, FitnessComponent, FitnessWeightHistoryComponent, FitnessWeightAdd, FitnessWeightEditComponent],
+  declarations: [MathComponent
+    , WeatherComponent
+    , FinanceComponent
+    , FitnessComponent
+    , FitnessWeightHistoryComponent
+    , FitnessWeightAdd
+    , FitnessWeightEditComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -20,5 +27,9 @@ import { FitnessWeightEditComponent } from './fitness-weight-edit/fitness-weight
     RouterModule,
     ReactiveFormsModule
   ]
+  , entryComponents: [
+    FitnessWeightEditComponent
+  ]
 })
-export class ApModule { }
+export class ApModule {
+}

@@ -2,6 +2,8 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {WeightService} from './WeightService';
 import {Weight} from './Weight';
 import {Subscription} from 'rxjs';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FitnessWeightEditComponent} from '../fitness-weight-edit/fitness-weight-edit.component';
 
 @Component({
   selector: 'ap-fitness-weight-history',
@@ -15,7 +17,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
   subscription: Subscription;
 
-  constructor(private weightService: WeightService) {
+  constructor(private weightService: WeightService, public dialog: MatDialog) {
 
 
     this.subscription = weightService.reloadWeightObservable.subscribe(
@@ -43,13 +45,10 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
     this.weightService.deleteWeight(id)
       .subscribe(
         (data: any) => console.log(data),
-        (err: any) => console.log(err)
+        (err: any) => console.log(err),
+        () => this.ngOnInit()
       );
     console.warn(`Delete weight ${id}).`);
-  }
-
-  async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   ngOnDestroy() {
@@ -57,5 +56,15 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
     this.subscription.unsubscribe();
   }
 
+  openDialogEdit(): void {
+    const dialogRef = this.dialog.open(FitnessWeightEditComponent, {
+      width: '250px',
+      // data: {name: this.name, animal: this.animal}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
 }
