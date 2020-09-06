@@ -32,6 +32,14 @@ export class WeightService {
       );
   }
 
+  getWeight(id: number): Observable<Weight> {
+    return this.http.get<Weight>(this.basicUrl.concat(`/${id}`))
+      .pipe(
+        tap(data => console.log('weight: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
 
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure
@@ -60,8 +68,8 @@ export class WeightService {
 
 
 // UPDATE
-  updateWight(updatedWeight: Weight): Observable<void> {
-    return this.http.put<void>(this.basicUrl.concat('/${updatedWeight.bookID}'), updatedWeight, {
+  updateWeight(updatedWeight: Weight): Observable<void> {
+    return this.http.put<void>(this.basicUrl.concat(`/${updatedWeight.id}`), updatedWeight, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -72,4 +80,6 @@ export class WeightService {
   deleteWeight(id: number): Observable<void> {
     return this.http.delete<void>(this.basicUrl.concat(`/${id}`));
   }
+
+
 }

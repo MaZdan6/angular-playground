@@ -56,15 +56,21 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
     this.subscription.unsubscribe();
   }
 
-  openDialogEdit(): void {
-    const dialogRef = this.dialog.open(FitnessWeightEditComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+  openDialogEdit(id: number): void {
+    let weightEdited: Weight;
+    this.weightService.getWeight(id).toPromise().then((weight: Weight) => {
+      weightEdited = weight;
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      const dialogRef = this.dialog.open(FitnessWeightEditComponent, {
+        width: '300px',
+        data: {weight: weightEdited}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+
     });
   }
 }
