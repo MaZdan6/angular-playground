@@ -13,7 +13,7 @@
     <div class="form-group">
       <label for="inputDate" class="col-lg-3 control-label">Date</label>
       <div class="col-lg-8">
-        <input type="text" class="form-control" id="inputDate" name="date" [(ngModel)]="weight.date">
+        <input type="text" class="form-control" id="inputDate" name="date" [(ngModel)]="weight.date" readonly>
       </div>
     </div>
 
@@ -23,11 +23,9 @@
 
       <div class="col-lg-8 col-lg-offset-3">
         <div mat-dialog-actions>
-          <button mat-button (click)="onNoClick()">cancel</button>
-          <!--<button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>-->
+          <button type="submit" class="btn btn-sm btn-primary" cdkFocusInitial>Save changes</button>
+          <button class="btn btn-sm btn-danger" mat-button (click)="onNoClick()" id="weightEditCancelBtn">cancel</button>
         </div>
-
-        <button type="submit" class="btn btn-primary" cdkFocusInitial>Save changes</button>
       </div>
     </div>
   </fieldset>

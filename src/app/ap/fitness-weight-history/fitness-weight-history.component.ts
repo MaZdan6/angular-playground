@@ -62,7 +62,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
       weightEdited = weight;
 
       const dialogRef = this.dialog.open(FitnessWeightEditComponent, {
-        width: '300px',
+        width: '400px',
         data: {weight: weightEdited}
       });
 
