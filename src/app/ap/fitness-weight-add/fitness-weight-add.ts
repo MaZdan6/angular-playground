@@ -2,13 +2,16 @@ import {Component, OnInit} from '@angular/core';
 
 import {Weight} from '../fitness-weight-history/Weight';
 import {WeightService} from '../fitness-weight-history/WeightService';
+import * as moment from 'moment';
 
 @Component({
   selector: 'fitness-weight-add',
   templateUrl: './fitness-weight-add.component.html',
-  styles: []
+  styleUrls: ['./fitness-weight-add.component.scss']
 })
 export class FitnessWeightAdd implements OnInit {
+  private dateFormat = 'YYYY/MM/DD';
+  private weight: Weight;
 
   constructor(private service: WeightService) {
   }
@@ -17,10 +20,11 @@ export class FitnessWeightAdd implements OnInit {
   }
 
   saveWeight(formValues: any): void {
-    let newWeight: Weight = <Weight> formValues;
-    console.log(newWeight);
+    this.weight = <Weight> formValues;
 
-    this.service.addWeight(newWeight)
+    this.formatDate();
+
+    this.service.addWeight(this.weight)
       .subscribe(
         (data: Weight) => {
           // alert('Success Adding');
@@ -31,4 +35,9 @@ export class FitnessWeightAdd implements OnInit {
       );
   }
 
+  private formatDate() {
+    const date = moment(this.weight.date);
+    const dateString: string = date.format(this.dateFormat);
+    this.weight.date = dateString;
+  }
 }

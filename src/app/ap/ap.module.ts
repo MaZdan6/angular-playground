@@ -10,7 +10,14 @@ import {RouterModule} from '@angular/router';
 import {FitnessWeightHistoryComponent} from './fitness-weight-history/fitness-weight-history.component';
 import {FitnessWeightAdd} from './fitness-weight-add/fitness-weight-add';
 import {FitnessWeightEditComponent} from './fitness-weight-edit/fitness-weight-edit.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MatMomentDateModule
+} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [MathComponent
@@ -25,10 +32,31 @@ import {MatDialog} from '@angular/material/dialog';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMomentDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
   , entryComponents: [
     FitnessWeightEditComponent
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['YYYY/MM/DD'],
+        },
+        display: {
+          dateInput: 'YYYY/MM/DD',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      }
+    },
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ]
 })
 export class ApModule {
