@@ -1,43 +1,10 @@
-<h1>BMI calculator</h1>
+<div class="row">
 
-
-<form (ngSubmit)="onSubmit()" #bmiForm="ngForm">
-  <div class="form-group row">
-
-    <label for="height">Height:</label>
-    <div class="col-sm-10">
-      <input type="text"
-             class="form-control"
-             id="height"
-             required
-             name="height"
-             [(ngModel)]="bmi.height"
-             maxlength="3"
-             minlength="2"
-      />
-    </div>
+  <div class="col-lg-5">
+    <fitness-weight-add></fitness-weight-add>
   </div>
-
-
-  <div class="form-group row">
-    <label for="wieght">Weight:</label>
-    <div class="col-sm-10">
-      <input type="text"
-             class="form-control"
-             id="wieght"
-             required
-             name="wieght"
-             [(ngModel)]="bmi.weight"
-             maxlength="4"
-             minlength="2"
-      />
-    </div>
+  <div class="col-lg-5">
+    <ap-fitness-bmi-calculator></ap-fitness-bmi-calculator>
   </div>
-
-
-  <button type="submit" class="btn btn-success">Submit</button>
-</form>
-<h2>Body mass index: {{bmi.index}}</h2>
-<pre>{{ bmi | json }}</pre>
-<fitness-weight-add></fitness-weight-add>
+</div>
 <ap-fitness-weight-history></ap-fitness-weight-history>

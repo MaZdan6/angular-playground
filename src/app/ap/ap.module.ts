@@ -18,6 +18,7 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MatMomentDateModule
 } from '@angular/material-moment-adapter';
+import { FitnessBmiCalculatorComponent } from './fitness-bmi-calculator/fitness-bmi-calculator.component';
 
 @NgModule({
   declarations: [MathComponent
@@ -26,7 +27,7 @@ import {
     , FitnessComponent
     , FitnessWeightHistoryComponent
     , FitnessWeightAdd
-    , FitnessWeightEditComponent],
+    , FitnessWeightEditComponent, FitnessBmiCalculatorComponent],
   imports: [
     CommonModule,
     HttpClientModule,
