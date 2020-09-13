@@ -35,7 +35,9 @@ export class FitnessWeightEditComponent implements OnInit {
       .subscribe(
         () => {
         },
-        (err: any) => console.log(err),
+        (err: any) => {
+          console.log(err), this.dialogRef.close();
+        },
         () => {
           this.weightService.reloadWeightSubject.next(true);
           this.dialogRef.close();

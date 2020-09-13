@@ -19,6 +19,9 @@ import {
   MatMomentDateModule
 } from '@angular/material-moment-adapter';
 import { FitnessBmiCalculatorComponent } from './fitness-bmi-calculator/fitness-bmi-calculator.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { FitnessWeightChartComponent } from './fitness-weight-chart/fitness-weight-chart.component';
 
 @NgModule({
   declarations: [MathComponent
@@ -27,7 +30,7 @@ import { FitnessBmiCalculatorComponent } from './fitness-bmi-calculator/fitness-
     , FitnessComponent
     , FitnessWeightHistoryComponent
     , FitnessWeightAdd
-    , FitnessWeightEditComponent, FitnessBmiCalculatorComponent],
+    , FitnessWeightEditComponent, FitnessBmiCalculatorComponent, FitnessWeightChartComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -37,7 +40,9 @@ import { FitnessBmiCalculatorComponent } from './fitness-bmi-calculator/fitness-
     MatMomentDateModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    BrowserAnimationsModule,
+    NgxChartsModule
   ]
   , entryComponents: [
     FitnessWeightEditComponent

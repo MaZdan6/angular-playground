@@ -19,7 +19,6 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
   constructor(private weightService: WeightService, public dialog: MatDialog) {
 
-
     this.subscription = weightService.reloadWeightObservable.subscribe(
       reloadWeight => {
         this.ngOnInit();
