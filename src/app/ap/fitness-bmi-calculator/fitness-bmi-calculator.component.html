@@ -3,8 +3,8 @@
   <div class="form-group row">
 
     <label for="height">Height:</label>
-    <div class="col-sm-10">
-      <input type="text"
+    <div class="col-sm-3">
+      <input
              class="form-control"
              id="height"
              required
@@ -12,6 +12,10 @@
              [(ngModel)]="bmi.height"
              maxlength="3"
              minlength="2"
+             type="number"
+             min="50"
+             max="250"
+             value="184"
       />
     </div>
   </div>
@@ -19,7 +23,7 @@
 
   <div class="form-group row">
     <label for="wieght">Weight:</label>
-    <div class="col-sm-10">
+    <div class="col-sm-3">
       <input type="text"
              class="form-control"
              id="wieght"
@@ -28,6 +32,10 @@
              [(ngModel)]="bmi.weight"
              maxlength="4"
              minlength="2"
+             type="number"
+             min="10"
+             max="300"
+             value="92.8"
       />
     </div>
   </div>
@@ -35,5 +43,6 @@
 
   <button type="submit" class="btn btn-success">Submit</button>
 </form>
-<h2>Body mass index: {{bmi.index}}</h2>
-<pre>{{ bmi | json }}</pre>
+<h3>Body mass index: {{bmi.index}}</h3>
+<h3>Category: {{bmi.category}}</h3>
+<h3>Fit Weight: {{bmi.fitWeight}}</h3>

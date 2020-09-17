@@ -1,29 +1,45 @@
-
-  <div class="well bs-component">
-    <form #addWeightForm="ngForm" (ngSubmit)="saveWeight(addWeightForm.value)" class="form-horizontal">
-      <fieldset>
-        <legend>Add New Weight</legend>
-        <div class="form-group">
-          <label for="inputWight" class="col-lg-3 control-label">Weight</label>
-          <div class="col-lg-3">
-            <input type="text" class="form-control" id="inputWight" placeholder="Weight" name="weight" ngModel>
-          </div>
+<div class="well bs-component">
+  <form #addWeightForm="ngForm" (ngSubmit)="saveWeight(addWeightForm.value)" class="form-horizontal">
+    <fieldset>
+      <legend>Add New Weight</legend>
+      <div class="form-group">
+        <label for="inputWeight" class="col-lg-3 control-label">Weight</label>
+        <div class="col-lg-3">
+          <input
+                 class="form-control"
+                 id="inputWeight"
+                 placeholder="Weight"
+                 name="weight"
+                 type="number"
+                 min="10"
+                 max="300"
+                 value="92.8"
+                 required="true"
+                 ngModel>
         </div>
-        <div class="form-group">
-          <label for="inputDate" class="col-lg-3 control-label">Date</label>
-          <div class="col-lg-3">
-            <mat-form-field >
-              <input matInput [matDatepicker]="inputDate" class="form-control" id="inputDate" placeholder="Date" name="date" ngModel disabled>
-              <mat-datepicker-toggle matSuffix [for]="inputDate"></mat-datepicker-toggle>
-              <mat-datepicker #inputDate disabled="false"></mat-datepicker>
-            </mat-form-field>
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="inputDate" class="col-lg-3 control-label">Date</label>
+        <div class="col-lg-3">
+          <mat-form-field>
+            <input matInput [matDatepicker]="inputDate"
+                   class="form-control"
+                   id="inputDate"
+                   placeholder="Date"
+                   name="date"
+                   ngModel
+                   disabled
+                   required="true">
+            <mat-datepicker-toggle matSuffix [for]="inputDate"></mat-datepicker-toggle>
+            <mat-datepicker #inputDate disabled="false"></mat-datepicker>
+          </mat-form-field>
         </div>
-        <div class="form-group">
-          <div class="col-lg-3">
-            <button type="submit" class="btn btn-primary">Save</button>
-          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-3">
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
-      </fieldset>
-    </form>
-  </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
