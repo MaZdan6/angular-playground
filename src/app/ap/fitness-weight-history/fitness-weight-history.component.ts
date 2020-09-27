@@ -4,6 +4,7 @@ import {Weight} from './Weight';
 import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FitnessWeightEditComponent} from '../fitness-weight-edit/fitness-weight-edit.component';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'ap-fitness-weight-history',
@@ -16,6 +17,15 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
   weights: Weight[] = [];
 
   subscription: Subscription;
+
+
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 7;
+  pageSizeOptions: number[] = [7, 14, 28];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
 
   constructor(private weightService: WeightService, public dialog: MatDialog) {
 

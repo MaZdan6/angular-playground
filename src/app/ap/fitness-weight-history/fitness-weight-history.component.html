@@ -3,14 +3,21 @@
     Weight List
   </div>
   <div class='card-body'>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="pageEvent = $event">
+    </mat-paginator>
     <div class='table-responsive'>
       <table class='table'
              *ngIf='weights && weights.length'>
+
         <thead>
         <tr>
           <th>id</th>
           <th>weight</th>
           <th>date</th>
+          <th>actions</th>
         </tr>
         </thead>
         <tbody>

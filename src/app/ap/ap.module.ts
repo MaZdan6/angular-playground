@@ -22,6 +22,7 @@ import { FitnessBmiCalculatorComponent } from './fitness-bmi-calculator/fitness-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { FitnessWeightChartComponent } from './fitness-weight-chart/fitness-weight-chart.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [MathComponent
@@ -31,20 +32,21 @@ import { FitnessWeightChartComponent } from './fitness-weight-chart/fitness-weig
     , FitnessWeightHistoryComponent
     , FitnessWeightAdd
     , FitnessWeightEditComponent, FitnessBmiCalculatorComponent, FitnessWeightChartComponent],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    MatMomentDateModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    NgxChartsModule
-  ]
-  , entryComponents: [
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule,
+        MatMomentDateModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        NgxChartsModule,
+        MatPaginatorModule
+    ]
+    , entryComponents: [
     FitnessWeightEditComponent
   ],
   providers: [
