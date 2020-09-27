@@ -5,7 +5,7 @@ import {WeightService} from '../fitness-weight-history/WeightService';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'fitness-weight-add',
+  selector: 'ap-fitness-weight-add',
   templateUrl: './fitness-weight-add.component.html',
   styleUrls: ['./fitness-weight-add.component.scss']
 })
@@ -24,15 +24,18 @@ export class FitnessWeightAdd implements OnInit {
 
     this.formatDate();
 
-    this.service.addWeight(this.weight)
-      .subscribe(
-        (data: Weight) => {
-          // alert('Success Adding');
-          console.log(data);
-        },
-        (err: any) => console.log(err),
-        () => this.service.reloadWeightSubject.next(true)
-      );
+    if (this.weight.weight && this.weight.date) {
+
+      this.service.addWeight(this.weight)
+        .subscribe(
+          (data: Weight) => {
+            console.log(data);
+          },
+          (err: any) => console.log(err),
+          () => this.service.reloadWeightSubject.next(true)
+        );
+    }
+
   }
 
   private formatDate() {
