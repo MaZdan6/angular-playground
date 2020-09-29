@@ -82,4 +82,14 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
     });
   }
+
+  /*
+  X-Total-Count: 15
+  <http://localhost:3000/weights?_page=4&_limit=2>; rel="next", */
+  changePage(pageEvent: PageEvent) {
+
+    console.log('pageEvent.pageIndex: ' + pageEvent.pageIndex);
+    console.log('pageEvent.pageSize: ' + pageEvent.pageSize);
+    console.log('pageEvent.length: ' + pageEvent.length);
+  }
 }

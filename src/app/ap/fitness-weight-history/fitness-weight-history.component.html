@@ -3,10 +3,11 @@
     Weight List
   </div>
   <div class='card-body'>
-    <mat-paginator [length]="length"
-                   [pageSize]="pageSize"
+    <mat-paginator (page)="changePage($event)"
+                   [length]="length"
                    [pageSizeOptions]="pageSizeOptions"
-                   (page)="pageEvent = $event">
+                   [pageSize]="pageSize"
+    >
     </mat-paginator>
     <div class='table-responsive'>
       <table class='table'
