@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
-import {catchError, tap, map} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
 import {Weight} from './Weight';
 

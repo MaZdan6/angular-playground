@@ -4,9 +4,10 @@
   </div>
   <div class='card-body'>
     <mat-paginator (page)="changePage($event)"
-                   [length]="length"
+                   [length]="30"
                    [pageSizeOptions]="pageSizeOptions"
-                   [pageSize]="pageSize"
+                   [pageSize]="pageLimit"
+                   [pageIndex]="page"
     >
     </mat-paginator>
     <div class='table-responsive'>
