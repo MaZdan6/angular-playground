@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap, map} from 'rxjs/operators';
 
@@ -9,12 +9,9 @@ import {Weight} from './Weight';
   providedIn: 'root'
 })
 export class WeightService {
-  // If using Stackblitz, replace the url with this line
-  // because Stackblitz can't find the api folder.
-  // private productUrl = 'assets/products/products.json';
+
   // http://localhost:3000/weights
-  // assets/weights/weights.json
-  private productUrl = 'http://localhost:3000/weights';
+  // mock/weights/weights.json
   private basicUrl = 'http://localhost:3000/weights';
 
   reloadWeightSubject = new Subject<boolean>();
@@ -25,7 +22,21 @@ export class WeightService {
   }
 
   getWeights(): Observable<Weight[]> {
-    return this.http.get<Weight[]>(this.productUrl)
+    return this.http.get<Weight[]>(this.basicUrl)
+      .pipe(
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getWeightPaginated(page: string, limit: string): Observable<Weight[]> {
+    const options = {
+      params: new HttpParams()
+        .set('_page', page)
+        .set('_limit', limit)
+    };
+
+    return this.http.get<Weight[]>(this.basicUrl, options)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)

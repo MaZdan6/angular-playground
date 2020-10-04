@@ -21,7 +21,8 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
   // MatPaginator Inputs
   length = 100;
-  pageSize = 7;
+  pageLimit: string = '7';
+  page: string = '1';
   pageSizeOptions: number[] = [7, 14, 28];
 
   // MatPaginator Output
@@ -38,7 +39,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
   }
 
   ngOnInit() {
-    this.weightService.getWeights().subscribe({
+    this.weightService.getWeightPaginated(this.page, this.pageLimit).subscribe({
       next: weight => {
         this.weights = weight;
       },
@@ -91,5 +92,14 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
     console.log('pageEvent.pageIndex: ' + pageEvent.pageIndex);
     console.log('pageEvent.pageSize: ' + pageEvent.pageSize);
     console.log('pageEvent.length: ' + pageEvent.length);
+
+    this.page = pageEvent.pageIndex.toString();
+    this.pageLimit = pageEvent.pageSize.toString();
+    this.weightService.getWeightPaginated(this.page, this.pageLimit).subscribe({
+      next: weight => {
+        this.weights = weight;
+      },
+      error: err => this.errorMessage = err
+    });
   }
 }
