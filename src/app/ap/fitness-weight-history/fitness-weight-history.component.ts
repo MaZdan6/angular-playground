@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FitnessWeightEditComponent} from '../fitness-weight-edit/fitness-weight-edit.component';
 import {PageEvent} from '@angular/material/paginator';
+import {WeightResponseInterceptorInterceptor} from './weight-response-interceptor.interceptor';
 
 @Component({
   selector: 'ap-fitness-weight-history',
@@ -20,7 +21,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
 
   // MatPaginator Inputs
-  length = 100;
+  length = '100';
   pageLimit: string = '7';
   page: string = '1';
   pageSizeOptions: number[] = [7, 14, 28];
@@ -40,11 +41,15 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
   ngOnInit() {
     this.weightService.getWeightPaginated(this.page, this.pageLimit).subscribe({
-      next: weight => {
-        this.weights = weight;
-      },
-      error: err => this.errorMessage = err
-    });
+        next: resp => {
+          this.length = resp.headers.get('X-Total-Count');
+          this.weights = resp.body;
+          console.log('length: ' + this.length);
+          console.log('this.weights: ' + this.weights);
+        },
+        error: err => this.errorMessage = err
+      }
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -95,11 +100,23 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
     this.page = pageEvent.pageIndex.toString();
     this.pageLimit = pageEvent.pageSize.toString();
+
     this.weightService.getWeightPaginated(this.page, this.pageLimit).subscribe({
-      next: weight => {
-        this.weights = weight;
-      },
-      error: err => this.errorMessage = err
-    });
+        next: resp => {
+          this.length = resp.headers.get('X-Total-Count');
+          this.weights = resp.body;
+          console.log('length: ' + this.length);
+          console.log('this.weights: ' + this.weights);
+        },
+        error: err => this.errorMessage = err
+      }
+    );
+    //length
+    /*this.interceptor.lengthWeightObservable.subscribe(
+      length => {
+        this.length = length;
+        console.log('length: ' + length);
+      }
+    );*/
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
@@ -29,11 +29,13 @@ export class WeightService {
       );
   }
 
-  getWeightPaginated(page: string, limit: string): Observable<Weight[]> {
+  getWeightPaginated(page: string, limit: string): Observable<HttpResponse<Weight[]>> {
     const options = {
       params: new HttpParams()
         .set('_page', page)
-        .set('_limit', limit)
+        .set('_limit', limit),
+      observe: 'response' as const,
+      responseType: 'json' as const,
     };
 
     return this.http.get<Weight[]>(this.basicUrl, options)

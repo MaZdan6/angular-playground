@@ -4,7 +4,7 @@
   </div>
   <div class='card-body'>
     <mat-paginator (page)="changePage($event)"
-                   [length]="30"
+                   [length]="length"
                    [pageSizeOptions]="pageSizeOptions"
                    [pageSize]="pageLimit"
                    [pageIndex]="page"
