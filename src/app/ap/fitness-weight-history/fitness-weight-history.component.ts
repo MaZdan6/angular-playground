@@ -5,7 +5,6 @@ import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FitnessWeightEditComponent} from '../fitness-weight-edit/fitness-weight-edit.component';
 import {PageEvent} from '@angular/material/paginator';
-import {WeightResponseInterceptorInterceptor} from './weight-response-interceptor.interceptor';
 
 @Component({
   selector: 'ap-fitness-weight-history',
@@ -40,16 +39,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
   }
 
   ngOnInit() {
-    this.weightService.getWeightPaginated(this.page, this.pageLimit).subscribe({
-        next: resp => {
-          this.length = resp.headers.get('X-Total-Count');
-          this.weights = resp.body;
-          console.log('length: ' + this.length);
-          console.log('this.weights: ' + this.weights);
-        },
-        error: err => this.errorMessage = err
-      }
-    );
+    this.getPage();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -89,34 +79,22 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
     });
   }
 
-  /*
-  X-Total-Count: 15
-  <http://localhost:3000/weights?_page=4&_limit=2>; rel="next", */
   changePage(pageEvent: PageEvent) {
 
-    console.log('pageEvent.pageIndex: ' + pageEvent.pageIndex);
-    console.log('pageEvent.pageSize: ' + pageEvent.pageSize);
-    console.log('pageEvent.length: ' + pageEvent.length);
 
     this.page = pageEvent.pageIndex.toString();
     this.pageLimit = pageEvent.pageSize.toString();
+    this.getPage();
+  }
 
+  private getPage() {
     this.weightService.getWeightPaginated(this.page, this.pageLimit).subscribe({
         next: resp => {
           this.length = resp.headers.get('X-Total-Count');
           this.weights = resp.body;
-          console.log('length: ' + this.length);
-          console.log('this.weights: ' + this.weights);
         },
         error: err => this.errorMessage = err
       }
     );
-    //length
-    /*this.interceptor.lengthWeightObservable.subscribe(
-      length => {
-        this.length = length;
-        console.log('length: ' + length);
-      }
-    );*/
   }
 }

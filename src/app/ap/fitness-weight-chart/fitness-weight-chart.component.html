@@ -1,4 +1,8 @@
 <p>fitness-weight-chart works!</p>
+<button (click)="getPertiod('3m')" class="btn btn-sm btn-warning" mat-raised-button type="button">3 months</button>&nbsp;
+<button (click)="getPertiod('1m')" class="btn btn-sm btn-warning" mat-raised-button type="button">1 month</button>&nbsp;
+<button (click)="getPertiod('2w')" class="btn btn-sm btn-warning" mat-raised-button type="button">2 weeks</button>&nbsp;
+<button (click)="getPertiod('1w')" class="btn btn-sm btn-warning" mat-raised-button type="button">1 week</button>&nbsp;
 <ngx-charts-line-chart
   [view]="view"
   [scheme]="colorScheme"

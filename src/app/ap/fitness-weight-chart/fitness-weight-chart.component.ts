@@ -55,11 +55,9 @@ export class FitnessWeightChartComponent implements OnInit {
     let dataItems: DataItem[] = this.weights.map((weight) => {
       return new DataItem(weight.date, weight.weight);
     });
-    console.log('dataItems');
-    console.log(dataItems);
 
     let series: Series = new Series();
-    series.name = 'series name';
+    series.name = 'Weight';
     series.series = dataItems;
     this.multi = [];
     this.multi.push(series);
@@ -79,4 +77,7 @@ export class FitnessWeightChartComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
+  getPertiod(pertiod: string) {
+    console.log('period:' + pertiod);
+  }
 }

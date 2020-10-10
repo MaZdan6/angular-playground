@@ -4,7 +4,7 @@ import {MathComponent} from './math/math.component';
 import {WeatherComponent} from './weather/weather.component';
 import {FinanceComponent} from './finance/finance.component';
 import {FitnessComponent} from './fitness/fitness.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {FitnessWeightHistoryComponent} from './fitness-weight-history/fitness-weight-history.component';
