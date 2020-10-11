@@ -33,7 +33,9 @@ export class WeightService {
     const options = {
       params: new HttpParams()
         .set('_page', page)
-        .set('_limit', limit),
+        .set('_limit', limit)
+        .set('_sort', 'id')
+        .set('_order', 'desc'),
       observe: 'response' as const,
       responseType: 'json' as const,
     };

@@ -54,10 +54,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
       provide: MAT_DATE_FORMATS,
       useValue: {
         parse: {
-          dateInput: ['YYYY/MM/DD'],
+          dateInput: ['YYYY-MM-DD'],
         },
         display: {
-          dateInput: 'YYYY/MM/DD',
+          dateInput: 'YYYY-MM-DD',
           monthYearLabel: 'MMM YYYY',
           dateA11yLabel: 'LL',
           monthYearA11yLabel: 'MMMM YYYY',

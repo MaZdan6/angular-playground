@@ -10,7 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./fitness-weight-add.component.scss']
 })
 export class FitnessWeightAdd implements OnInit {
-  private dateFormat = 'YYYY/MM/DD';
+  private dateFormat = 'YYYY-MM-DD';
   private weight: Weight;
 
   constructor(private service: WeightService) {
@@ -20,7 +20,7 @@ export class FitnessWeightAdd implements OnInit {
   }
 
   saveWeight(formValues: any): void {
-    this.weight = <Weight> formValues;
+    this.weight = formValues as Weight;
 
     this.formatDate();
 
