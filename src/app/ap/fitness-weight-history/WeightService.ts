@@ -96,5 +96,20 @@ export class WeightService {
     return this.http.delete<void>(this.basicUrl.concat(`/${id}`));
   }
 
+  getWeightAfterDate(beginDate: string) {
+    const options = {
+      params: new HttpParams()
+        .set('date_gte', beginDate)
+        .set('_sort', 'id')
+        .set('_order', 'asc'),
+      observe: 'response' as const,
+      responseType: 'json' as const,
+    };
 
+    return this.http.get<Weight[]>(this.basicUrl, options)
+      .pipe(
+        tap(),
+        catchError(this.handleError)
+      );
+  }
 }

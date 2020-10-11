@@ -3,6 +3,7 @@ import {Weight} from '../fitness-weight-history/Weight';
 import {WeightService} from '../fitness-weight-history/WeightService';
 import {DataItem, Series} from '../series';
 import {Subscription} from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ap-fitness-weight-chart',
@@ -77,7 +78,20 @@ export class FitnessWeightChartComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
-  getPertiod(pertiod: string) {
-    console.log('period:' + pertiod);
+  getPertiod(amount: number = 3, unit: string = 'month') {
+    console.log('unit:' + unit);
+    let beginDate: string;
+    // @ts-ignore
+    beginDate = moment().subtract(amount, unit).format('YYYY-MM-DD');
+    console.log('beginDate: ' + beginDate);
+
+    this.weightService.getWeightAfterDate(beginDate).subscribe({
+      next: resp => {
+        this.weights = resp.body;
+        this.ngOnInit();
+      },
+      error: err => console.error(err),
+    });
+    this.ngOnInit();
   }
 }
