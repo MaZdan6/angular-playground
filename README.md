@@ -3,6 +3,10 @@ run server (in mocks directory):
 ```json-server --watch db.json```
 GET data: http://localhost:3000/weights
 
+## budowanie
+```
+ng build --configuration=staging -> użycie zmiennych w environmant.staging.ts
+````
 
 # AngularPlayground
 

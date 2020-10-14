@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 import {Weight} from './Weight';
 
@@ -12,17 +13,19 @@ export class WeightService {
 
   // http://localhost:3000/weights
   // mock/weights/weights.json
-  private basicUrl = 'http://localhost:3000/weights';
+  private url = '/weights';
 
   reloadWeightSubject = new Subject<boolean>();
   reloadWeightObservable = this.reloadWeightSubject.asObservable();
   private delete$: Observable<void>;
 
   constructor(private http: HttpClient) {
+    this.url = environment.apiUrl + this.url;
+    console.log('weight url: ' + this.url);
   }
 
   getWeights(): Observable<Weight[]> {
-    return this.http.get<Weight[]>(this.basicUrl)
+    return this.http.get<Weight[]>(this.url)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -40,7 +43,7 @@ export class WeightService {
       responseType: 'json' as const,
     };
 
-    return this.http.get<Weight[]>(this.basicUrl, options)
+    return this.http.get<Weight[]>(this.url, options)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -48,7 +51,7 @@ export class WeightService {
   }
 
   getWeight(id: number): Observable<Weight> {
-    return this.http.get<Weight>(this.basicUrl.concat(`/${id}`))
+    return this.http.get<Weight>(this.url.concat(`/${id}`))
       .pipe(
         tap(data => console.log('weight: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -73,7 +76,7 @@ export class WeightService {
   }
 
   addWeight(newWeight: Weight): Observable<Weight> {
-    return this.http.post<Weight>(this.basicUrl, newWeight, {
+    return this.http.post<Weight>(this.url, newWeight, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -84,7 +87,7 @@ export class WeightService {
 
 // UPDATE
   updateWeight(updatedWeight: Weight): Observable<void> {
-    return this.http.put<void>(this.basicUrl.concat(`/${updatedWeight.id}`), updatedWeight, {
+    return this.http.put<void>(this.url.concat(`/${updatedWeight.id}`), updatedWeight, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -93,7 +96,7 @@ export class WeightService {
 
 // DELETE
   deleteWeight(id: number): Observable<void> {
-    return this.http.delete<void>(this.basicUrl.concat(`/${id}`));
+    return this.http.delete<void>(this.url.concat(`/${id}`));
   }
 
   getWeightAfterDate(beginDate: string) {
@@ -106,7 +109,7 @@ export class WeightService {
       responseType: 'json' as const,
     };
 
-    return this.http.get<Weight[]>(this.basicUrl, options)
+    return this.http.get<Weight[]>(this.url, options)
       .pipe(
         tap(),
         catchError(this.handleError)
