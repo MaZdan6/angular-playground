@@ -26,16 +26,56 @@ export class FitnessWeightAdd implements OnInit {
 
     if (this.weight.weight && this.weight.date) {
 
-      this.service.addWeight(this.weight)
-        .subscribe(
-          (data: Weight) => {
-            console.log(data);
+      let weightFromDB: Weight;
+
+      this.service.getWeightByDate(this.weight.date).subscribe({
+          next: resp => {
+            console.log('getWeightByDate');
+            const weights: Weight[] = resp.body;
+            if (weights != null) {
+              weightFromDB = weights[0];
+            }
+            this.createOrUpdate(weightFromDB);
           },
-          (err: any) => console.log(err),
-          () => this.service.reloadWeightSubject.next(true)
-        );
+          error: err => console.log(err),
+        }
+      );
     }
 
+  }
+
+  private createOrUpdate(weightFromDB: Weight) {
+    if (weightFromDB == null) {
+      this.create();
+    } else {
+      this.update(weightFromDB);
+    }
+  }
+
+  private create() {
+    console.log('addWeight');
+    this.service.addWeight(this.weight)
+      .subscribe(
+        (data: Weight) => {
+          console.log(data);
+        },
+        (err: any) => console.log(err),
+        () => this.service.reloadWeightSubject.next(true)
+      );
+  }
+
+  private update(weightFromDB: Weight) {
+    console.log('updateWeight');
+    weightFromDB.weight = this.weight.weight;
+    this.service.updateWeight(weightFromDB)
+      .subscribe(
+        () => {
+        },
+        (err: any) => {
+          console.log(err);
+        },
+        () => this.service.reloadWeightSubject.next(true)
+      );
   }
 
   private formatDate() {
