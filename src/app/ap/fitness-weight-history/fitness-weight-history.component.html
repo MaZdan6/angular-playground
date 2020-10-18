@@ -3,6 +3,9 @@
     Weight List
   </div>
   <div class='card-body'>
+    <button (click)="openDialogAdd(38)" class="btn btn-sm btn-primary" mat-raised-button type="button">
+      Add
+    </button>&nbsp;
     <mat-paginator (page)="changePage($event)"
                    [length]="length"
                    [pageSizeOptions]="pageSizeOptions"

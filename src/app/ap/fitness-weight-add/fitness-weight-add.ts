@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 
 import {Weight} from '../fitness-weight-history/Weight';
 import {WeightService} from '../fitness-weight-history/WeightService';
 import * as moment from 'moment';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'ap-fitness-weight-add',
@@ -11,9 +12,14 @@ import * as moment from 'moment';
 })
 export class FitnessWeightAdd implements OnInit {
   private dateFormat = 'YYYY-MM-DD';
-  private weight: Weight;
+  weight: Weight;
 
-  constructor(private service: WeightService) {
+  constructor(
+    public dialogRef: MatDialogRef<FitnessWeightAdd>
+    , @Inject(MAT_DIALOG_DATA) public data: any
+    , private service: WeightService) {
+    console.log('data: ' + JSON.stringify(data.weight));
+    this.weight = data.weight;
   }
 
   ngOnInit() {
@@ -60,7 +66,10 @@ export class FitnessWeightAdd implements OnInit {
           console.log(data);
         },
         (err: any) => console.log(err),
-        () => this.service.reloadWeightSubject.next(true)
+        () => {
+          this.service.reloadWeightSubject.next(true),
+            this.dialogRef.close();
+        }
       );
   }
 
@@ -74,7 +83,10 @@ export class FitnessWeightAdd implements OnInit {
         (err: any) => {
           console.log(err);
         },
-        () => this.service.reloadWeightSubject.next(true)
+        () => {
+          this.service.reloadWeightSubject.next(true),
+            this.dialogRef.close();
+        }
       );
   }
 
@@ -82,5 +94,9 @@ export class FitnessWeightAdd implements OnInit {
     const date = moment(this.weight.date);
     const dateString: string = date.format(this.dateFormat);
     this.weight.date = dateString;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

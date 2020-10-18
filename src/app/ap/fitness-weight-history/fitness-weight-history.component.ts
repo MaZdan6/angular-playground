@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FitnessWeightEditComponent} from '../fitness-weight-edit/fitness-weight-edit.component';
 import {PageEvent} from '@angular/material/paginator';
+import {FitnessWeightAdd} from '../fitness-weight-add/fitness-weight-add';
 
 @Component({
   selector: 'ap-fitness-weight-history',
@@ -73,7 +74,24 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        // this.animal = result;
+      });
+
+    });
+  }
+
+  openDialogAdd(id: number): void {
+    let lastWeight: Weight;
+    this.weightService.getWeight(id).toPromise().then((weight: Weight) => {
+      lastWeight = weight;
+      lastWeight.date = null;
+      lastWeight.id = null;
+      const dialogRef = this.dialog.open(FitnessWeightAdd, {
+        width: '400px',
+        data: {weight: lastWeight}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
       });
 
     });
