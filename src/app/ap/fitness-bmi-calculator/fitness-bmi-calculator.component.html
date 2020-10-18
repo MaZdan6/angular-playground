@@ -39,9 +39,10 @@
       />
     </div>
   </div>
-
-
-  <button type="submit" class="btn btn-success">Submit</button>
+  <div mat-dialog-actions>
+    <button type="submit" class="btn btn-sm btn-primary" cdkFocusInitial>Save changes</button>
+    <button class="btn btn-sm btn-danger" mat-button (click)="onNoClick()" id="cancelBtn">cancel</button>
+  </div>
 </form>
 <h3>Body mass index: {{bmi.index}}</h3>
 <h3>Category: {{bmi.category}}</h3>
