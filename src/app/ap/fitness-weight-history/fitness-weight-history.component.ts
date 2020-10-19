@@ -28,6 +28,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
   // MatPaginator Output
   pageEvent: PageEvent;
+  private lastWeight: Weight;
 
   constructor(private weightService: WeightService, public dialog: MatDialog) {
 
@@ -78,23 +79,45 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
     });
   }
-
-  openDialogAdd(id: number): void {
+  getLastWeight(): void {
+    let weightFromDB: Weight;
+    this.weightService.getlastWeight().subscribe({
+        next: resp => {
+          console.log('getWeightByDate');
+          const weights: Weight[] = resp.body;
+          if (weights != null) {
+            weightFromDB = weights[0];
+            this.lastWeight = weightFromDB;
+          }
+        },
+        error: err => console.log(err),
+      }
+    );
+  }
+  openDialogAdd(): void {
     let lastWeight: Weight;
-    this.weightService.getWeight(id).toPromise().then((weight: Weight) => {
-      lastWeight = weight;
-      lastWeight.date = null;
-      lastWeight.id = null;
-      const dialogRef = this.dialog.open(FitnessWeightAdd, {
-        width: '400px',
-        data: {weight: lastWeight}
-      });
+    this.weightService.getlastWeight().subscribe({
+        next: resp => {
+          console.log('getWeightByDate');
+          const weights: Weight[] = resp.body;
+          if (weights != null) {
+            lastWeight = weights[0];
+          }
+          lastWeight = lastWeight;
+          lastWeight.date = null;
+          lastWeight.id = null;
+          const dialogRef = this.dialog.open(FitnessWeightAdd, {
+            width: '400px',
+            data: {weight: lastWeight}
+          });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
-
-    });
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+        },
+        error: err => console.log(err),
+      }
+    );
   }
 
   changePage(pageEvent: PageEvent) {
@@ -115,4 +138,6 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
       }
     );
   }
+
+
 }

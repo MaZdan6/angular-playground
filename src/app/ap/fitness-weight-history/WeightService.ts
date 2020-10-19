@@ -66,6 +66,22 @@ export class WeightService {
         catchError(this.handleError)
       );
   }
+  getlastWeight(): Observable<HttpResponse<Weight[]>> {
+    const options = {
+      params: new HttpParams()
+        .set('_sort', 'date')
+        .set('_limit', '1')
+        .set('_order', 'desc'),
+      observe: 'response' as const,
+      responseType: 'json' as const,
+    };
+
+    return this.http.get<Weight[]>(this.url, options)
+      .pipe(
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
 
   getWeight(id: number): Observable<Weight> {
     return this.http.get<Weight>(this.url.concat(`/${id}`))
@@ -74,6 +90,7 @@ export class WeightService {
         catchError(this.handleError)
       );
   }
+
 
 
   private handleError(err: HttpErrorResponse) {
@@ -132,4 +149,6 @@ export class WeightService {
         catchError(this.handleError)
       );
   }
+
+
 }
