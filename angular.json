@@ -76,6 +76,30 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "backend_localhost": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.backend_localhost.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -87,6 +111,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-playground:build:production"
+            },
+            "backend_localhost": {
+              "browserTarget": "angular-playground:build:backend_localhost"
             }
           }
         },

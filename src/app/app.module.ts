@@ -11,6 +11,8 @@ import {FitnessWeightEditComponent} from './ap/fitness-weight-edit/fitness-weigh
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FitnessService} from './ap/fitness-bmi-calculator/FitnessService';
+import {BasicInterceptor} from './ap/interceptor/basic-interceptor.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {FitnessService} from './ap/fitness-bmi-calculator/FitnessService';
     MatDialogModule
   ],
   providers: [FitnessService,
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}],
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    { provide: HTTP_INTERCEPTORS, useClass: BasicInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [FitnessWeightHistoryComponent, FitnessWeightEditComponent],
 })

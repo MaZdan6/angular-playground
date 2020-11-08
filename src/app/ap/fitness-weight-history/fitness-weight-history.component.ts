@@ -23,7 +23,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
   // MatPaginator Inputs
   length = '100';
   pageLimit: string = '7';
-  page: string = '1';
+  page: string = '0';
   pageSizeOptions: number[] = [7, 14, 28];
 
   // MatPaginator Output
@@ -79,6 +79,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
 
     });
   }
+
   getLastWeight(): void {
     let weightFromDB: Weight;
     this.weightService.getlastWeight().subscribe({
@@ -94,6 +95,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
       }
     );
   }
+
   openDialogAdd(): void {
     let lastWeight: Weight;
     this.weightService.getlastWeight().subscribe({
@@ -133,6 +135,7 @@ export class FitnessWeightHistoryComponent implements OnDestroy, OnChanges, OnIn
         next: resp => {
           this.length = resp.headers.get('X-Total-Count');
           this.weights = resp.body;
+          console.log('X-Total-Count: ' + resp.headers.get('X-Total-Count'));
         },
         error: err => this.errorMessage = err
       }

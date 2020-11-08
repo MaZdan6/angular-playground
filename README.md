@@ -4,8 +4,15 @@ run server (in mocks directory):
 GET data: http://localhost:3000/weights
 
 ## budowanie
+użycie zmiennych w environmant.staging.ts
 ```
-ng build --configuration=staging -> użycie zmiennych w environmant.staging.ts
+ng build --configuration=staging
+````
+## uruchomienie
+użycie zmiennych w environmant.backend_localhost.ts
+```
+ng serve --configuration=backend_localhost
+
 ````
 
 # AngularPlayground
