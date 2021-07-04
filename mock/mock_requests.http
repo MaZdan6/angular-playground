@@ -1,0 +1,18 @@
+
+###pagination
+GET http://localhost:3000/weights?_page=0&_limit=7
+###1
+GET http://localhost:3000/weights?_page=1&_limit=7
+###2
+GET http://localhost:3000/weights?_page=2&_limit=7
+
+### date range
+GET http://localhost:3000/weights?date_gte=2020-10-04
+
+
+### last record
+GET http://localhost:3000/weights?_sort=date&_order=desc&_limit=1
+
+###craete
+###update
+###delete
